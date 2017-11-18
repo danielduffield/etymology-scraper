@@ -10,7 +10,8 @@
     "start": "node index.js",
     "watch:client": "watchify -t babelify client/main.js -v -o server/public/bundle.js",
     "watch:server": "nodemon index.js",
-    "watch": "run-p watch:client watch:server"
+    "watch": "run-p watch:client watch:server",
+    "docker:build": "npm run bundle && docker build -t ety-lexi ."
   },
   "repository": {
     "type": "git",
