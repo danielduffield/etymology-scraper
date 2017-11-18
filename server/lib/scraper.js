@@ -9,6 +9,12 @@ const Readability = require("readability-node");
 const uri = require("url");
 const read = require("node-readability");
 const sanitizer = require("sanitizer");
+const nlp = require("compromise");
+const _ = require("lodash");
+
+function getDictionaryEntry(noun) {
+  return Promise.resolve({ word: noun, etymology: `${noun} etymology` });
+}
 
 const memcache = {};
 const scraper = function(url) {
@@ -18,33 +24,44 @@ const scraper = function(url) {
         if (err) {
           return reject(err);
         }
-        const obj = {
+        let obj = {
           url: url,
           title: doc.title,
           contents: stripHTML(doc.content || "")
         };
         memcache[url] = obj;
-        res(obj);
+        return res(obj);
       });
     } else {
-      res(memcache[url]);
+      return res(memcache[url]);
     }
+  }).then(article => {
+    const nouns = analyzeArticle(article.contents);
+    return Promise.all(nouns.map(noun => getDictionaryEntry(noun))).then(
+      allEntries => {
+        article.etymologies = allEntries;
+        return article;
+      }
+    );
   });
 };
-
-module.exports = scraper;
 
 function stripHTML(html) {
   let clean = sanitizer.sanitize(html, function(str) {
     return str;
   });
-  // Remove all remaining HTML tags.
   clean = clean.replace(/<(?:.|\n)*?>/gm, "");
-
-  // RegEx to remove needless newlines and whitespace.
-  // See: http://stackoverflow.com/questions/816085/removing-redundant-line-breaks-with-regular-expressions
   clean = clean.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gi, "\n");
-
-  // Return the final string, minus any leading/trailing whitespace.
   return clean.trim();
 }
+
+function topTwenty(array) {
+  return _.take(array, 20);
+}
+function analyzeArticle(contents) {
+  const parsed = nlp(contents);
+  const nouns = parsed.nouns().out("topk");
+  return topTwenty(nouns);
+}
+
+module.exports = scraper;
