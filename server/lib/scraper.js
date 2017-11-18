@@ -5,46 +5,63 @@
 // followwed by 2000 words or more
 
 const cheerio = require("cheerio");
-const Readability = require("readability-node");
 const uri = require("url");
 const read = require("node-readability");
 const sanitizer = require("sanitizer");
+const nlp = require("compromise");
+const _ = require("lodash");
 
-const memcache = {};
-const scraper = function(url) {
-  return new Promise((res, reject) => {
-    if (!memcache[url]) {
-      read(url, function(err, doc) {
-        if (err) {
-          return reject(err);
+class Scraper {
+  constructor() {
+    this.memcache = {};
+  }
+  scrape(url) {
+    return new Promise((res, reject) => {
+      if (!this.memcache[url]) {
+        read(url, (err, doc) => {
+          if (err) {
+            return reject(err);
+          }
+          let obj = {
+            url: url,
+            title: doc.title,
+            contents: this.stripHTML(doc.content || "")
+          };
+          this.memcache[url] = obj;
+          return res(obj);
+        });
+      } else {
+        return res(this.memcache[url]);
+      }
+    }).then(article => {
+      const nouns = this.analyzeArticle(article);
+      return Promise.all(nouns.map(noun => this.getDictionaryEntry(noun))).then(
+        allEntries => {
+          article.etymologies = allEntries;
+          return article;
         }
-        const obj = {
-          url: url,
-          title: doc.title,
-          contents: stripHTML(doc.content || "")
-        };
-        memcache[url] = obj;
-        res(obj);
-      });
-    } else {
-      res(memcache[url]);
-    }
-  });
-};
-
-module.exports = scraper;
-
-function stripHTML(html) {
-  let clean = sanitizer.sanitize(html, function(str) {
-    return str;
-  });
-  // Remove all remaining HTML tags.
-  clean = clean.replace(/<(?:.|\n)*?>/gm, "");
-
-  // RegEx to remove needless newlines and whitespace.
-  // See: http://stackoverflow.com/questions/816085/removing-redundant-line-breaks-with-regular-expressions
-  clean = clean.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gi, "\n");
-
-  // Return the final string, minus any leading/trailing whitespace.
-  return clean.trim();
+      );
+    });
+  }
+  analyzeArticle({ contents }) {
+    const parsed = nlp(contents);
+    const nouns = parsed.nouns().out("topk");
+    return this.topTwenty(nouns);
+  }
+  stripHTML(html) {
+    let clean = sanitizer.sanitize(html, function(str) {
+      return str;
+    });
+    clean = clean.replace(/<(?:.|\n)*?>/gm, "");
+    clean = clean.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gi, "\n");
+    return clean.trim();
+  }
+  topTwenty(array) {
+    return _.take(array, 20);
+  }
+  getDictionaryEntry(noun) {
+    return Promise.resolve({ word: noun, etymology: `${noun} etymology` });
+  }
 }
+
+module.exports = Scraper;
