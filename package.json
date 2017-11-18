@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A web app for readers who would like to get feedback about a webpage's content and the etymology thereof.",
   "main": "index.js",
-<<<<<<< 0162fc2ce73ca27c93c379a5d36b975a1740d31d
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "browserify -t babelify client/main.js -o server/public/bundle.js",
@@ -15,19 +14,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danielduffield/etymology-scraper.git"
-=======
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/danielduffield/etymology-scraper"
->>>>>>> Add express server
   },
   "keywords": [],
   "author": "",
@@ -35,13 +21,14 @@
   "bugs": {
     "url": "https://github.com/danielduffield/etymology-scraper/issues"
   },
-<<<<<<< 0162fc2ce73ca27c93c379a5d36b975a1740d31d
   "homepage": "https://github.com/danielduffield/etymology-scraper#readme",
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -52,7 +39,4 @@
     "nodemon": "^1.12.1",
     "watchify": "^3.9.0"
   }
-=======
-  "homepage": "https://github.com/danielduffield/etymology-scraper#readme"
->>>>>>> Add express server
 }
