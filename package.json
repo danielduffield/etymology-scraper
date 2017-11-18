@@ -4,11 +4,12 @@
   "description": "A web app for readers who would like to get feedback about a webpage's content and the etymology thereof.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/",
+    "lint": "eslint .",
     "bundle": "browserify -t babelify client/main.js -o server/public/bundle.js",
     "start": "node server/index.js",
     "watch:client": "watchify -t babelify client/main.js -v -o server/public/bundle.js",
-    "watch:server": "nodemon server/index.js",
+    "watch:server": "nodemon index.js",
     "watch": "run-p watch:client watch:server"
   },
   "repository": {
@@ -27,7 +28,18 @@
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "styled-components": "^2.2.3"
+    "styled-components": "^2.2.3",
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "jsdom": "^11.3.0",
+    "mocha": "^4.0.1",
+    "node-readability": "^3.0.0",
+    "readability": "^0.1.0",
+    "readability-node": "^0.1.0",
+    "sanitizer": "^0.1.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -35,7 +47,17 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babelify": "^8.0.0",
     "browserify": "^14.5.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.5.0",
     "nodemon": "^1.12.1",
+    "npm-run-all": "^4.1.2",
+    "prettier": "1.8.2",
+    "prettier-eslint": "^8.2.2",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "watchify": "^3.9.0"
   }
 }
