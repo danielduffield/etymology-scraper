@@ -1,5 +1,5 @@
 const mocha = require("mocha");
-const scraper = require("../scraper");
+const scraper = require("../server/lib/scraper");
 
 const expect = require("chai").expect;
 

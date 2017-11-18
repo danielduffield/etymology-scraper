@@ -1,6 +1,12 @@
+const scraper = require("../lib/scraper");
 module.exports = {
   scrapeUrl: (req, res) => {
-    console.log('hello world');
-    res.status(200).json({message: 'HELLO THERE'});
+    const body = req.body;
+    if (body.url) {
+      return scraper(body.url).then(article => {
+        return res.json(article.title);
+      });
+    }
+    return res.status(400).send("No Url Found");
   }
-}
+};
