@@ -10,23 +10,29 @@ const uri = require("url");
 const read = require("node-readability");
 const sanitizer = require("sanitizer");
 
+const memcache = {};
 const scraper = function(url) {
   return new Promise((res, reject) => {
-    read(url, function(err, doc) {
-      if (err) {
-        return reject(err);
-      }
-      const obj = {
-        url: url,
-        title: doc.getTitle().trim(),
-        contents: stripHTML(doc.getContent() || "")
-      };
-      res(obj);
-    });
+    if (!memcache[url]) {
+      read(url, function(err, doc) {
+        if (err) {
+          return reject(err);
+        }
+        const obj = {
+          url: url,
+          title: doc.title,
+          contents: stripHTML(doc.content || "")
+        };
+        memcache[url] = obj;
+        res(obj);
+      });
+    } else {
+      res(memcache[url]);
+    }
   });
 };
 
-module.exports = scraper
+module.exports = scraper;
 
 function stripHTML(html) {
   let clean = sanitizer.sanitize(html, function(str) {

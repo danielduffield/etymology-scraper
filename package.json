@@ -4,7 +4,7 @@
   "description": "A web app for readers who would like to get feedback about a webpage's content and the etymology thereof.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,10 @@
   "homepage": "https://github.com/danielduffield/etymology-scraper#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "chai": "^4.1.2",
     "cheerio": "^1.0.0-rc.2",
     "jsdom": "^11.3.0",
+    "mocha": "^4.0.1",
     "node-readability": "^3.0.0",
     "readability": "^0.1.0",
     "readability-node": "^0.1.0",
