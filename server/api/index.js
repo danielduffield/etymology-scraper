@@ -1,7 +1,8 @@
 const router = require("express").Router();
 
 // controllers
-const scrape = require("../controllers/scrapeController");
+const ScrapeController = require("../controllers/scrapeController");
+const scrape = new ScrapeController();
 
 router.get("/_version", (req, res, next) => {
   res.send("1");
