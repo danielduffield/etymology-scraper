@@ -29,7 +29,6 @@ describe("Scraper", function() {
     const url =
       "http://beta.latimes.com/local/lanow/la-me-ln-gemmel-moore-autopsy-20171118-story.html#nt=oft12aH-1gp2";
     return scraper(url).then(article => {
-      console.log(article);
       expect(article)
         .to.haveOwnProperty("title")
         .eql(
