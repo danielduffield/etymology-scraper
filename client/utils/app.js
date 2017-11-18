@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import UrlSubmitForm from "./urlSubmitForm.js";
-import ResultsPage from "./resultsPage.js";
+import QueryResults from "./queryResults.js";
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
         <MainTitle>Etymology Scraper</MainTitle>
       </TitleContainer>
       <UrlSubmitForm />
-      <ResultsPage />
+      <QueryResults />
     </MainContainer>
   );
 }

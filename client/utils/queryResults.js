@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-class ResultsPage extends React.Component {
+class QueryResults extends React.Component {
   render() {
     return (
       <div
@@ -28,5 +28,5 @@ function mapStateToProps(state) {
   };
 }
 
-const Connected = connect(mapStateToProps)(ResultsPage);
+const Connected = connect(mapStateToProps)(QueryResults);
 export default Connected;
