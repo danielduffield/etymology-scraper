@@ -22,6 +22,7 @@ const MainContainer = styled.div`
 
 const TitleContainer = styled.div`
   text-align: center;
+  margin: 100px 0;
 `
 
 const MainTitle = styled.h1`
