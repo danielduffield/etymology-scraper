@@ -4,7 +4,7 @@ module.exports = {
     const body = req.body;
     if (body.url) {
       return scraper(body.url).then(article => {
-        return res.json(article.title);
+        return res.json(article.contents);
       });
     }
     return res.status(400).send("No Url Found");
