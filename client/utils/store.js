@@ -2,6 +2,7 @@ import { createStore, combineReducers } from "redux";
 
 function reducer(
   state = {
+    view: "submitUrl",
     urlInputValue: "",
     results: ""
   },
@@ -13,7 +14,8 @@ function reducer(
     case "RECEIVED_QUERY_RESULTS":
       return Object.assign({}, state, {
         urlInputValue: "",
-        results: action.payload.response
+        results: action.payload.results,
+        view: "displayResults"
       });
     default:
       return state;
