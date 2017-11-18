@@ -5,8 +5,17 @@ import { connect } from "react-redux";
 class ResultsPage extends React.Component {
   render() {
     return (
-      <div>
-        <p>{this.state.results}</p>
+      <div
+        className={
+          "container-fluid" +
+          (this.props.view === "displayResults" ? "" : " hidden")
+        }
+      >
+        <div className="row">
+          <div className="col-6 offset-3">
+            <p>{this.props.results}</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -14,7 +23,8 @@ class ResultsPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    results: state.results
+    results: state.results,
+    view: state.view
   };
 }
 
