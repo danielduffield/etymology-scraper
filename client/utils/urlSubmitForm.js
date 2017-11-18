@@ -64,6 +64,7 @@ class UrlSubmitForm extends React.Component {
                   placeholder="Your URL Goes Here"
                   onChange={this.updateUrlInput}
                   value={this.props.urlInputValue}
+                  autoFocus
                 />
                 <span className="input-group-btn">
                   <button
