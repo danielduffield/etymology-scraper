@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import UrlSubmitForm from './utils/urlSubmitForm.js'
+import App from './utils/app.js'
 
 const $root = document.getElementById('root')
 
@@ -9,7 +9,7 @@ render()
 
 function render() {
   ReactDOM.render(
-    <UrlSubmitForm />,
+    <App />,
     $root
   )
 }
