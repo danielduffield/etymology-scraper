@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import store from './utils/store'
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 
-import App from './utils/app.js'
+import App from "./utils/app.js";
 
-const $root = document.getElementById('root')
+const $root = document.getElementById("root");
 
-render()
+render();
 
 function render() {
   ReactDOM.render(
@@ -15,5 +15,5 @@ function render() {
       <App />
     </Provider>,
     $root
-  )
+  );
 }
