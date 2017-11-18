@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class QueryResults extends React.Component {
@@ -13,13 +14,19 @@ class QueryResults extends React.Component {
       >
         <div className="row">
           <div className="col-6 offset-3">
-            <p>{this.props.results}</p>
+            <p>{this.props.results.content}</p>
           </div>
         </div>
       </div>
     );
   }
 }
+
+QueryResults.propTypes = {
+  dispatch: PropTypes.func,
+  view: PropTypes.string,
+  results: PropTypes.object
+};
 
 function mapStateToProps(state) {
   return {

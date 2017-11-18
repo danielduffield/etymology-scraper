@@ -4,7 +4,7 @@ function reducer(
   state = {
     view: "submitUrl",
     urlInputValue: "",
-    results: ""
+    results: {}
   },
   action
 ) {

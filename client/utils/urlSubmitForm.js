@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class UrlSubmitForm extends React.Component {
@@ -81,6 +82,12 @@ class UrlSubmitForm extends React.Component {
     );
   }
 }
+
+UrlSubmitForm.propTypes = {
+  dispatch: PropTypes.func,
+  view: PropTypes.string,
+  urlInputValue: PropTypes.string
+};
 
 function mapStateToProps(state) {
   return {
