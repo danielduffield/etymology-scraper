@@ -8,6 +8,7 @@ class UrlSubmitForm extends React.Component {
 
     this.updateUrlInput = this.updateUrlInput.bind(this);
     this.submitUrl = this.submitUrl.bind(this);
+    this.updateResults = this.updateResults.bind(this);
 
     this.urlForm = null;
   }
@@ -27,21 +28,23 @@ class UrlSubmitForm extends React.Component {
         Accept: "application/json"
       },
       body: JSON.stringify({ url })
-    })
-      .then(res => res.json())
-      .then(content => console.log(content));
+    }).then(res => this.updateResults(res));
   }
   updateResults(response) {
     response.json().then(results => {
       this.props.dispatch({
         type: "RECEIVED_QUERY_RESULTS",
-        paylod: { results }
+        payload: { results }
       });
     });
   }
   render() {
     return (
-      <div className="container-fluid">
+      <div
+        className={
+          "container-fluid" + (this.props.view === "submitUrl" ? "" : " hidden")
+        }
+      >
         <div className="row">
           <div className="col-6 offset-3">
             <form
@@ -81,7 +84,8 @@ class UrlSubmitForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    urlInputValue: state.urlInputValue
+    urlInputValue: state.urlInputValue,
+    view: state.view
   };
 }
 
