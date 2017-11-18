@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import store from './utils/store'
 
 import App from './utils/app.js'
 
@@ -9,7 +11,9 @@ render()
 
 function render() {
   ReactDOM.render(
-    <App />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     $root
   )
 }
