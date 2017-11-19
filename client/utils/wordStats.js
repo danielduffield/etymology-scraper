@@ -4,6 +4,29 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class WordStats extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.selectKeyword = this.selectKeyword.bind(this);
+    this.deselectKeyword = this.deselectKeyword.bind(this);
+  }
+  selectKeyword(event) {
+    console.log(event.target.textContent);
+    this.props.dispatch({
+      type: "SELECTED_KEYWORD",
+      payload: {
+        keyword: {
+          word: event.target.dataset.keyword
+        }
+      }
+    });
+  }
+  deselectKeyword(event) {
+    console.log("Unselected");
+    this.props.dispatch({
+      type: "DESELECTED_KEYWORD"
+    });
+  }
   render() {
     return (
       <ContentContainer className="container">
@@ -20,18 +43,29 @@ class WordStats extends React.Component {
                 <KeywordMatch
                   key={index}
                   className="row"
+                  data-keyword={wordData.word.normal}
                   matchIndex={index}
                   colorMap={this.props.colorMap}
+                  onMouseOver={this.selectKeyword}
+                  onMouseOut={this.deselectKeyword}
                 >
-                  <div className="col-1">{wordNum}</div>
-                  <div className="col-4">
-                    <span>{wordData.word.normal}</span>
+                  <div className="col-1" data-keyword={wordData.word.normal}>
+                    {wordNum}
                   </div>
-                  <div className="col-4">
-                    <span>{wordData.word.count}</span>
+                  <div className="col-4" data-keyword={wordData.word.normal}>
+                    <span data-keyword={wordData.word.normal}>
+                      {wordData.word.normal}
+                    </span>
                   </div>
-                  <div className="col-3">
-                    <span>{wordData.word.percent + "%"}</span>
+                  <div className="col-4" data-keyword={wordData.word.normal}>
+                    <span data-keyword={wordData.word.normal}>
+                      {wordData.word.count}
+                    </span>
+                  </div>
+                  <div className="col-3" data-keyword={wordData.word.normal}>
+                    <span data-keyword={wordData.word.normal}>
+                      {wordData.word.percent + "%"}
+                    </span>
                   </div>
                 </KeywordMatch>
               );
@@ -59,7 +93,8 @@ const TableHeadings = styled.div`
 WordStats.propTypes = {
   view: PropTypes.string,
   results: PropTypes.object,
-  colorMap: PropTypes.array
+  colorMap: PropTypes.array,
+  dispatch: PropTypes.func
 };
 
 function mapStateToProps(state) {
