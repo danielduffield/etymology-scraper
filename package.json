@@ -26,9 +26,11 @@
   "homepage": "https://github.com/danielduffield/etymology-scraper#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "compromise": "^11.1.0",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "lodash": "^4.17.4",
     "mocha": "^4.0.1",
