@@ -1,23 +1,11 @@
 const Scraper = require("../lib/scraper");
 const scraper = new Scraper();
 
-const redis = require("redis");
-const client = redis.createClient();
+const Word = require("../lib/word");
+const word = new Word();
 
-client.on("error", (err) => {
-  console.log("Error ", err);
-});
-
-// client.hmset('frameworks', 'javascript', 'AngularJS', 'css', 'Bootstrap', 'node', 'Express');
-//
-// client.hgetall('frameworks', function(err, object) {
-//     console.log(object);
-// });
-
-// client.set("string key", "string val", redis.print);
-// client.get("string key", (err, object) => {
-//   console.log(object);
-// });
+// word.isWordInRedis('string key');
+// word.saveWordInRedis('science');
 
 class ScrapeController {
   scrapeUrl(req, res) {
