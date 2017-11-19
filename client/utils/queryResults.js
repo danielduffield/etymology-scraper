@@ -32,7 +32,6 @@ class QueryResults extends React.Component {
   }
 }
 
-
 const Tab = styled.li`
   color: #dae2df;
 `;
@@ -84,14 +83,6 @@ const Card = props => (
     </div>
   </div>
 );
-
-const colorMap = {
-  en: "#b0413e",
-  fr: "#05668d",
-  de: "#548687",
-  zh: "#3c91e6",
-  nor: "#f29559"
-};
 
 const LangSquare = styled.span`
   background-color: ${props => colorMap[props.language] || `white`} ;
