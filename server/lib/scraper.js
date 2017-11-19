@@ -4,7 +4,6 @@
 // that contain h1 - h6
 // followwed by 2000 words or more
 
-const cheerio = require("cheerio");
 const uri = require("url");
 const read = require("node-readability");
 const sanitizer = require("sanitizer");
