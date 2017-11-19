@@ -1,22 +1,4 @@
 var etymologies = [
-	{
-		"word": {
-			"normal": "Karen",
-			"count": 255,
-			"percent": 25
-		},
-		"origin": "Old English",
-		"etymology": "fact etymology obj"
-	},
-	{
-		"word": {
-			"normal": "CJ",
-			"count": 390,
-			"percent": 50
-		},
-		"origin": "Old English",
-		"etymology": "fact etymology obj"
-	},
     {
       "word": {
         "normal": "abortion",
