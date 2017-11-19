@@ -56,8 +56,7 @@ class Word {
     const url =
       `https://www.dictionaryapi.com/api/v1/references/collegiate/xml/${word}?key=${dictionary_api}`;
 
-     return axios
-      .get(url)
+    return axios.get(url)
       .then(response => {
         return parseStringAsync(response.data);
       })
