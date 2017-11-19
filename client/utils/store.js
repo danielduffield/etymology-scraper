@@ -12,6 +12,7 @@ function reducer(
     case "UPDATED_URL_INPUT_VALUE":
       return Object.assign({}, state, { urlInputValue: action.payload.text });
     case "RECEIVED_QUERY_RESULTS":
+      console.log("RESULTS ", action.payload.results);
       return Object.assign({}, state, {
         urlInputValue: "",
         results: action.payload.results,
