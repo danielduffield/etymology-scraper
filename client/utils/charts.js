@@ -21,9 +21,15 @@ const data = [
 ];
 */
 
-const data = etymologies.forEach(function(d) {
-    r = {category: d.word.normal, value: d.word.count};
-    return r;
+var sum = 0;
+etymologies.etymologies.forEach(function(d) {
+    sum += d.word.count;
+});
+
+const data = [];
+etymologies.etymologies.forEach(function(d) {
+    var r = {category: d.word.normal, value: d.word.count / sum};
+    data.push(r);
 });
 
 class SimpleBarChart extends Component{
@@ -32,17 +38,25 @@ class SimpleBarChart extends Component{
     }
     render(){
         console.log(etymologies);
+        console.log(data);
 
         return (
-            <BarChart width={600} height={300} data={data}
-                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                <XAxis dataKey="category"/>
-                <YAxis/>
+            <div>
+            <BarChart 
+                width={560} 
+                height={700} 
+                data={data} 
+                layout="vertical"
+                margin={{top: 5, right: 30, left: 50, bottom: 5}}
+                >
+                <XAxis type="number"/>
+                <YAxis type="category" dataKey="category" interval={0} />
                 <CartesianGrid strokeDasharray="3 3"/>
                 <Tooltip/>
                 <Legend />
                 <Bar dataKey="value" fill="#8884d8" />
             </BarChart>
+            </div>
         )
     }
 }
