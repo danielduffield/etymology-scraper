@@ -4,6 +4,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class ArticleView extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.selectKeyword = this.selectKeyword.bind(this);
+    this.deselectKeyword = this.deselectKeyword.bind(this);
+  }
   scanContents(text, keywords) {
     let acc = "";
     let toRender = [];
@@ -17,6 +23,8 @@ class ArticleView extends React.Component {
               className="keyword"
               matchIndex={index}
               colorMap={this.props.colorMap}
+              onMouseOver={this.selectKeyword}
+              onMouseOut={this.deselectKeyword}
             >
               {word}
             </KeywordMatch>
@@ -29,6 +37,23 @@ class ArticleView extends React.Component {
       matched = false;
     });
     return toRender;
+  }
+  selectKeyword(event) {
+    console.log(event.target.textContent);
+    this.props.dispatch({
+      type: "SELECTED_KEYWORD",
+      payload: {
+        keyword: {
+          word: event.target.textContent
+        }
+      }
+    });
+  }
+  deselectKeyword(event) {
+    console.log("Unselected");
+    this.props.dispatch({
+      type: "DESELECTED_KEYWORD"
+    });
   }
   render() {
     return (

@@ -5,7 +5,17 @@ import { connect } from "react-redux";
 
 class WordEtym extends React.Component {
   render() {
-    return <div />;
+    return (
+      <div>
+        {this.props.selected.word ? (
+          <div>
+            <span>{this.props.selected.word}</span>
+          </div>
+        ) : (
+          <p>None Selected</p>
+        )}
+      </div>
+    );
   }
 }
 
@@ -15,13 +25,16 @@ const ContentContainer = styled.div`
 
 WordEtym.propTypes = {
   view: PropTypes.string,
-  results: PropTypes.object
+  results: PropTypes.object,
+  selected: PropTypes.object,
+  word: PropTypes.string
 };
 
 function mapStateToProps(state) {
   return {
     view: state.view,
-    results: state.results
+    results: state.results,
+    selected: state.selected
   };
 }
 

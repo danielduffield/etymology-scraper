@@ -5,7 +5,12 @@ function reducer(
     view: "submitUrl",
     urlInputValue: "",
     results: {},
-    selected: {},
+    selected: {
+      word: "",
+      matchIndex: null,
+      etym: [],
+      date: ""
+    },
     keywords: [],
     textBlock: "",
     parsedText: ""
@@ -25,6 +30,21 @@ function reducer(
           wordData => wordData.word.normal
         ),
         textBlock: action.payload.results.contents
+      });
+    case "SELECTED_KEYWORD":
+      return Object.assign({}, state, {
+        selected: {
+          word: action.payload.keyword.word
+        }
+      });
+    case "DESELECTED_KEYWORD":
+      return Object.assign({}, state, {
+        selected: {
+          word: "",
+          matchIndex: null,
+          etym: [],
+          date: ""
+        }
       });
     default:
       return state;
