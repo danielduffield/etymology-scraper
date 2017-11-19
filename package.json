@@ -33,6 +33,7 @@
     "lodash": "^4.17.4",
     "mocha": "^4.0.1",
     "node-readability": "^3.0.0",
+    "recharts": "1.0.0-beta.2",
     "sanitizer": "^0.1.3"
   },
   "devDependencies": {

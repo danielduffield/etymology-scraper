@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-
 import UrlSubmitForm from "./urlSubmitForm.js";
 import QueryResults from "./queryResults.js";
+import SimpleBarChart from "./charts.js";
 
 export default function App() {
   return (
@@ -12,6 +12,7 @@ export default function App() {
       </TitleContainer>
       <UrlSubmitForm />
       <QueryResults />
+      <SimpleBarChart />
     </MainContainer>
   );
 }

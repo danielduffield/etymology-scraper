@@ -198,3 +198,4 @@ var etymologies = [
       "etymology": "fact etymology obj"
     }
 ];
+module.exports = {etymologies: etymologies}
