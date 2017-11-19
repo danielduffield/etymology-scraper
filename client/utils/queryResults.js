@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import ArticleView from "./articleView.js";
 import WordStats from "./wordStats.js";
+import WordEtym from "./wordEtym.js";
 
 class QueryResults extends React.Component {
   render() {
@@ -17,19 +18,42 @@ class QueryResults extends React.Component {
       >
         <div className="row">
           <div className="col-3">
-            <WordStats />
+            <WordStats colorMap={colorMap} />
           </div>
           <div className="col-6">
-            <ArticleView />
+            <ArticleView colorMap={colorMap} />
           </div>
           <div className="col-3">
-            <WordStats />
+            <WordEtym />
           </div>
         </div>
       </div>
     );
   }
 }
+
+const colorMap = [
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "firebrick",
+  "palegoldenrod",
+  "purple",
+  "brown",
+  "orange",
+  "indigo",
+  "grey",
+  "pink",
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "firebrick",
+  "palegoldenrod",
+  "purple",
+  "brown"
+];
 
 QueryResults.propTypes = {
   dispatch: PropTypes.func,

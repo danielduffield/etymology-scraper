@@ -13,7 +13,11 @@ class ArticleView extends React.Component {
         if (match.toLowerCase() === word.toLowerCase()) {
           toRender.push(<span>{acc}</span>);
           toRender.push(
-            <KeywordMatch className="keyword" matchIndex={index}>
+            <KeywordMatch
+              className="keyword"
+              matchIndex={index}
+              colorMap={this.props.colorMap}
+            >
               {word}
             </KeywordMatch>
           );
@@ -48,34 +52,12 @@ class ArticleView extends React.Component {
 ArticleView.propTypes = {
   dispatch: PropTypes.func,
   view: PropTypes.string,
-  results: PropTypes.object
+  results: PropTypes.object,
+  colorMap: PropTypes.array
 };
 
-const colorMap = [
-  "red",
-  "blue",
-  "green",
-  "yellow",
-  "firebrick",
-  "palegoldenrod",
-  "purple",
-  "brown",
-  "orange",
-  "indigo",
-  "grey",
-  "pink",
-  "red",
-  "blue",
-  "green",
-  "yellow",
-  "firebrick",
-  "palegoldenrod",
-  "purple",
-  "brown"
-];
-
 const KeywordMatch = styled.span`
-  background-color: ${props => colorMap[props.matchIndex]};
+  background-color: ${props => props.colorMap[props.matchIndex]};
 `;
 
 function mapStateToProps(state) {
