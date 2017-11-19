@@ -5,7 +5,16 @@ function reducer(
   state = {
     view: "displayResults",
     urlInputValue: "",
-    results: {}
+    results: {},
+    selected: {
+      word: "",
+      matchIndex: null,
+      etym: [],
+      date: ""
+    },
+    keywords: [],
+    textBlock: "",
+    parsedText: ""
   },
   action
 ) {
@@ -19,10 +28,30 @@ function reducer(
     case "UPDATED_URL_INPUT_VALUE":
       return Object.assign({}, state, { urlInputValue: action.payload.text });
     case "RECEIVED_QUERY_RESULTS":
+      console.log("RESULTS ", action.payload.results);
       return Object.assign({}, state, {
         urlInputValue: "",
         results: action.payload.results,
-        view: "displayResults"
+        view: "displayResults",
+        keywords: action.payload.results.etymologies.map(
+          wordData => wordData.word.normal
+        ),
+        textBlock: action.payload.results.contents
+      });
+    case "SELECTED_KEYWORD":
+      return Object.assign({}, state, {
+        selected: {
+          word: action.payload.keyword.word
+        }
+      });
+    case "DESELECTED_KEYWORD":
+      return Object.assign({}, state, {
+        selected: {
+          word: "",
+          matchIndex: null,
+          etym: [],
+          date: ""
+        }
       });
     default:
       return state;

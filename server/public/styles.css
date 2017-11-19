@@ -7,3 +7,16 @@
 .hidden {
   display: none;
 }
+
+.title-container {
+  text-align: center;
+  margin: 100px 0 50px;
+}
+
+.main-title {
+  font-size: 3em;
+}
+
+.affix {
+  position: fixed;
+}

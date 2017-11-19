@@ -48,6 +48,13 @@ class UrlSubmitForm extends React.Component {
       >
         <div className="row">
           <div className="col-6 offset-3">
+            <div className="title-container">
+              <h1 className="main-title">Etymology Scraper</h1>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6 offset-3">
             <form
               id="url-submit-form"
               onSubmit={this.submitUrl}
@@ -64,6 +71,7 @@ class UrlSubmitForm extends React.Component {
                   placeholder="Your URL Goes Here"
                   onChange={this.updateUrlInput}
                   value={this.props.urlInputValue}
+                  autoFocus
                 />
                 <span className="input-group-btn">
                   <button

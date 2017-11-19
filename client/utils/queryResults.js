@@ -3,6 +3,36 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import ArticleView from "./articleView.js";
+import WordStats from "./wordStats.js";
+import WordEtym from "./wordEtym.js";
+
+class QueryResults extends React.Component {
+  render() {
+    return (
+      <div
+        className={
+          "container-fluid" +
+          (this.props.view === "displayResults" ? "" : " hidden")
+        }
+      >
+        <div className="row">
+          <div className="col-3">
+            <WordStats colorMap={colorMap} />
+          </div>
+          <div className="col-6">
+            <ArticleView colorMap={colorMap} />
+          </div>
+          <div className="col-3">
+            <WordEtym />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+
 const Tab = styled.li`
   color: #dae2df;
 `;
@@ -80,7 +110,7 @@ class Analytics extends React.Component {
     );
   }
 }
-class QueryResults extends React.Component {
+class AnalyticsDisplay extends React.Component {
   switchPage(view) {
     this.props.dispatch({
       type: "CHANGE_PAGE",
@@ -112,6 +142,29 @@ class QueryResults extends React.Component {
     );
   }
 }
+
+const colorMap = [
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "firebrick",
+  "palegoldenrod",
+  "purple",
+  "brown",
+  "orange",
+  "indigo",
+  "grey",
+  "pink",
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "firebrick",
+  "palegoldenrod",
+  "purple",
+  "brown"
+];
 
 QueryResults.propTypes = {
   dispatch: PropTypes.func,
