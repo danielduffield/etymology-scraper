@@ -20,10 +20,10 @@ const data = [
     {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
 ];
 */
-
-const data = etymologies.forEach(function(d) {
-    r = {category: d.word.normal, value: d.word.count};
-    return r;
+const data = [];
+etymologies.etymologies.forEach(function(d) {
+    var r = {category: d.word.normal, value: d.word.count};
+    data.push(r);
 });
 
 class SimpleBarChart extends Component{
