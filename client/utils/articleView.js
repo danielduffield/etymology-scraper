@@ -40,18 +40,16 @@ class ArticleView extends React.Component {
     return toRender;
   }
   selectKeyword(event) {
-    console.log(event.target.textContent);
     this.props.dispatch({
       type: "SELECTED_KEYWORD",
       payload: {
         keyword: {
-          word: event.target.textContent
+          word: event.target.textContent.toLowerCase()
         }
       }
     });
   }
   deselectKeyword(event) {
-    console.log("Unselected");
     this.props.dispatch({
       type: "DESELECTED_KEYWORD"
     });

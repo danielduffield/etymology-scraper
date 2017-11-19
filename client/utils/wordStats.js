@@ -11,7 +11,6 @@ class WordStats extends React.Component {
     this.deselectKeyword = this.deselectKeyword.bind(this);
   }
   selectKeyword(event) {
-    console.log(event.target.textContent);
     this.props.dispatch({
       type: "SELECTED_KEYWORD",
       payload: {
@@ -22,7 +21,6 @@ class WordStats extends React.Component {
     });
   }
   deselectKeyword(event) {
-    console.log("Unselected");
     this.props.dispatch({
       type: "DESELECTED_KEYWORD"
     });
