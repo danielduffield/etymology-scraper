@@ -56,13 +56,28 @@ class ArticleView extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h3>
-          <a href={this.props.results.url}>{this.props.results.title}</a>
-        </h3>
-        {this.props.results.etymologies
-          ? this.scanContents(this.props.textBlock, this.props.keywords)
-          : ""}
+      <div className="container">
+        <div className="row">
+          <div className="col-6 offset-3">
+            <div className="title-container">
+              <h1 className="main-title">Etymology Scraper</h1>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-8 offset-2">
+            <h4>
+              <a href={this.props.results.url}>{this.props.results.title}</a>
+            </h4>
+          </div>
+          <div className="row">
+            <div className="col">
+              {this.props.results.etymologies
+                ? this.scanContents(this.props.textBlock, this.props.keywords)
+                : ""}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -76,6 +91,10 @@ ArticleView.propTypes = {
   textBlock: PropTypes.string,
   keywords: PropTypes.array
 };
+
+const TitleLinkContainer = styled.p`
+  text-align: center;
+`;
 
 const KeywordMatch = styled.span`
   background-color: ${props => props.colorMap[props.matchIndex]};
