@@ -25,8 +25,6 @@ when user hovers over a highlighted word, a a popup appears on the side that sho
 create permalinks for the article so it can be shared and loaded.
 
 
-
-
 Potential Problems:
 A lot of words don't have etymological data, is there a pattern for these words? Is there a specific reason these words have no etymological data? is it just a shitty dictionary api
 
