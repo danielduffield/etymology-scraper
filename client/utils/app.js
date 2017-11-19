@@ -23,8 +23,10 @@ const MainContainer = styled.div`
 `;
 
 const TitleContainer = styled.div`
+  font-family: "Lato", sans-serif;
   text-align: center;
   margin: 100px 0;
+  color: #c0c0c0c;
 `;
 
 const MainTitle = styled.h1`
