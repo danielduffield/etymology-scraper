@@ -36,6 +36,7 @@ class ArticleView extends React.Component {
       acc = matched ? " " : acc + word + " ";
       matched = false;
     });
+    if (acc) toRender.push(<span>{acc}</span>);
     return toRender;
   }
   selectKeyword(event) {
