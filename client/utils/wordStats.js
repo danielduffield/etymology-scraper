@@ -7,14 +7,31 @@ class WordStats extends React.Component {
   render() {
     return (
       <ContentContainer>
+        <div className="row">
+          <div className="col-6">Word</div>
+          <div className="col-3">Occurences</div>
+          <div className="col-3">Percentage</div>
+        </div>
         {this.props.results.etymologies
           ? this.props.results.etymologies.map((wordData, index) => {
+              const wordNum = index + 1;
               return (
-                <div key={index}>
-                  <p>{"Word: " + wordData.word.normal}</p>
-                  <p>{"Count: " + wordData.word.count}</p>
-                  <p>{"Percent: " + wordData.word.percent}</p>
-                </div>
+                <KeywordMatch
+                  key={index}
+                  className="row"
+                  matchIndex={index}
+                  colorMap={this.props.colorMap}
+                >
+                  <div className="col-6">
+                    <span>{wordNum + ". " + wordData.word.normal}</span>
+                  </div>
+                  <div className="col-3">
+                    <span>{wordData.word.count}</span>
+                  </div>
+                  <div className="col-3">
+                    <span>{wordData.word.percent + "%"}</span>
+                  </div>
+                </KeywordMatch>
               );
             })
           : ""}
@@ -25,11 +42,17 @@ class WordStats extends React.Component {
 
 const ContentContainer = styled.div`
   border: 2px solid black;
+  text-align: center;
+`;
+
+const KeywordMatch = styled.div`
+  background-color: ${props => props.colorMap[props.matchIndex]};
 `;
 
 WordStats.propTypes = {
   view: PropTypes.string,
-  results: PropTypes.object
+  results: PropTypes.object,
+  colorMap: PropTypes.array
 };
 
 function mapStateToProps(state) {
@@ -41,19 +64,3 @@ function mapStateToProps(state) {
 
 const Connected = connect(mapStateToProps)(WordStats);
 export default Connected;
-
-/*
-
-{this.props.results.etymologies
-  ? this.props.results.etymologies.map((keyWord, index) => {
-      return (
-        <div key={index}>
-          <p>{"Key Word: " + keyWord.word.normal}</p>
-          <p>{"Count: " + keyWord.word.count}</p>
-          <p>{"Percent: " + keyWord.word.percent}</p>
-        </div>
-      );
-    })
-  : ""}
-
-*/
