@@ -16,3 +16,7 @@
 .main-title {
   font-size: 3em;
 }
+
+.affix {
+  position: fixed;
+}

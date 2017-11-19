@@ -27,7 +27,7 @@ class WordStats extends React.Component {
   }
   render() {
     return (
-      <ContentContainer className="container">
+      <ContentContainer className="sticky-top">
         <TableHeadings className="row">
           <div className="col-1">#</div>
           <div className="col-4">Word</div>
@@ -74,18 +74,24 @@ class WordStats extends React.Component {
   }
 }
 
+const Wrapper = styled.div`
+  width: 100%;
+`;
+
 const ContentContainer = styled.div`
-  border: 2px solid black;
   text-align: center;
 `;
 
 const KeywordMatch = styled.div`
   background-color: ${props => props.colorMap[props.matchIndex]};
+  margin-left: 0;
+  margin-right: 0;
 `;
 
 const TableHeadings = styled.div`
   font-weight: bold;
-  border-bottom: 2px solid black;
+  margin-left: 0;
+  margin-right: 0;
 `;
 
 WordStats.propTypes = {
