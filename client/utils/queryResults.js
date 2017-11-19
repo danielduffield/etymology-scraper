@@ -3,6 +3,9 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import ArticleView from "./articleView.js";
+import WordStats from "./wordStats.js";
+
 class QueryResults extends React.Component {
   render() {
     return (
@@ -13,8 +16,14 @@ class QueryResults extends React.Component {
         }
       >
         <div className="row">
-          <div className="col-6 offset-3">
-            <p>{this.props.results.content}</p>
+          <div className="col-3">
+            <WordStats />
+          </div>
+          <div className="col-6">
+            <ArticleView />
+          </div>
+          <div className="col-3">
+            <WordStats />
           </div>
         </div>
       </div>
