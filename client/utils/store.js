@@ -4,7 +4,11 @@ function reducer(
   state = {
     view: "submitUrl",
     urlInputValue: "",
-    results: {}
+    results: {},
+    selected: {},
+    keywords: [],
+    textBlock: "",
+    parsedText: ""
   },
   action
 ) {
@@ -16,7 +20,11 @@ function reducer(
       return Object.assign({}, state, {
         urlInputValue: "",
         results: action.payload.results,
-        view: "displayResults"
+        view: "displayResults",
+        keywords: action.payload.results.etymologies.map(
+          wordData => wordData.word.normal
+        ),
+        textBlock: action.payload.results.contents
       });
     default:
       return state;

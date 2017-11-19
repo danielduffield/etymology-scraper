@@ -37,12 +37,7 @@ class ArticleView extends React.Component {
           <a href={this.props.results.url}>{this.props.results.title}</a>
         </h3>
         {this.props.results.etymologies
-          ? this.scanContents(
-              this.props.results.contents,
-              this.props.results.etymologies.map(
-                wordData => wordData.word.normal
-              )
-            )
+          ? this.scanContents(this.props.textBlock, this.props.keywords)
           : ""}
       </div>
     );
@@ -53,7 +48,9 @@ ArticleView.propTypes = {
   dispatch: PropTypes.func,
   view: PropTypes.string,
   results: PropTypes.object,
-  colorMap: PropTypes.array
+  colorMap: PropTypes.array,
+  textBlock: PropTypes.string,
+  keywords: PropTypes.array
 };
 
 const KeywordMatch = styled.span`
@@ -63,6 +60,8 @@ const KeywordMatch = styled.span`
 function mapStateToProps(state) {
   return {
     results: state.results,
+    keywords: state.keywords,
+    textBlock: state.textBlock,
     view: state.view
   };
 }

@@ -5,11 +5,7 @@ import { connect } from "react-redux";
 
 class WordEtym extends React.Component {
   render() {
-    return (
-      <div>
-        <span>bap</span>
-      </div>
-    );
+    return <div />;
   }
 }
 
