@@ -6,12 +6,13 @@ import { connect } from "react-redux";
 class WordStats extends React.Component {
   render() {
     return (
-      <ContentContainer>
-        <div className="row">
-          <div className="col-6">Word</div>
-          <div className="col-3">Occurences</div>
-          <div className="col-3">Percentage</div>
-        </div>
+      <ContentContainer className="container">
+        <TableHeadings className="row">
+          <div className="col-1">#</div>
+          <div className="col-4">Word</div>
+          <div className="col-4">Occurences</div>
+          <div className="col-3">Percent</div>
+        </TableHeadings>
         {this.props.results.etymologies
           ? this.props.results.etymologies.map((wordData, index) => {
               const wordNum = index + 1;
@@ -22,10 +23,11 @@ class WordStats extends React.Component {
                   matchIndex={index}
                   colorMap={this.props.colorMap}
                 >
-                  <div className="col-6">
-                    <span>{wordNum + ". " + wordData.word.normal}</span>
+                  <div className="col-1">{wordNum}</div>
+                  <div className="col-4">
+                    <span>{wordData.word.normal}</span>
                   </div>
-                  <div className="col-3">
+                  <div className="col-4">
                     <span>{wordData.word.count}</span>
                   </div>
                   <div className="col-3">
@@ -47,6 +49,11 @@ const ContentContainer = styled.div`
 
 const KeywordMatch = styled.div`
   background-color: ${props => props.colorMap[props.matchIndex]};
+`;
+
+const TableHeadings = styled.div`
+  font-weight: bold;
+  border-bottom: 2px solid black;
 `;
 
 WordStats.propTypes = {
