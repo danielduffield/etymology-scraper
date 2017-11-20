@@ -3,7 +3,7 @@ import logger from "redux-logger";
 
 function reducer(
   state = {
-    view: "displayResults",
+    view: "submitUrl",
     urlInputValue: "",
     results: {},
     selected: {
