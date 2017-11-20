@@ -17,29 +17,36 @@ const wordArr = ['acapella', 'acapella', 'macaronic'];
 // const redis_word = word.getWordInRedis('literature');
 // console.log('redis word', redis_word);
 
-// Promise.all(wordArr.map(item => word.isWordInRedis(item)))
-//   .then(() => {
-//     Promise.all(wordArr.map(item => word.getWordInRedis(item)))
-//       .then(data => {
-//         console.log('array docs', util.inspect(data, { showHidden: true, depth: null }));
-//       });
+// Promise.all(wordArr.map(item => word.getWordInRedis(item)
+//   .then(result => result
+//     ? Promise.resolve(result)
+//     : word.setWordInRedis(item))
+//   ))
+//   .then(data => {
+//     console.log('array docs', util.inspect(data, { showHidden: true, depth: null }));
 //   });
-
-Promise.all(wordArr.map(item => word.getWordInRedis(item)
-  .then(result => result
-    ? Promise.resolve(result)
-    : word.setWordInRedis(item))
-  ))
-  .then(data => {
-    console.log('array docs', util.inspect(data, { showHidden: true, depth: null }));
-  });
 
 class ScrapeController {
   scrapeUrl(req, res) {
     const body = req.body;
     if (body.url) {
       return scraper.scrape(body.url).then(article => {
-        return res.json(article);
+        const wordArr = article.etymologies.map(item => {
+          return item.word.normal;
+        });
+        console.log(wordArr);
+
+        Promise.all(wordArr.map(item => word.getWordInRedis(item)
+          .then(result => result
+            ? Promise.resolve(result)
+            : word.setWordInRedis(item))
+          ))
+          .then(data => {
+            // console.log('array docs', util.inspect(data, { showHidden: true, depth: null }));
+            article['data'] = data;
+            return res.json(article);
+          });
+
       });
     }
     return res.status(400).send("No Url Found");

@@ -1,7 +1,6 @@
 const redis = require("redis");
 const client = redis.createClient();
 const axios = require("axios");
-const parser = require('xml2json');
 const util = require('util');
 const parseString = require('xml2js').parseString;
 const bluebird = require("bluebird");
