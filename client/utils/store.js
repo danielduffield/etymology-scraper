@@ -14,7 +14,9 @@ function reducer(
     },
     keywords: [],
     textBlock: "",
-    parsedText: ""
+    parsedText: "",
+    defined: [],
+    definitions: []
   },
   action
 ) {
@@ -36,7 +38,11 @@ function reducer(
         keywords: action.payload.results.etymologies.map(
           wordData => wordData.word.normal
         ),
-        textBlock: action.payload.results.contents
+        textBlock: action.payload.results.contents,
+        definitions: action.payload.results.data.filter(etym => etym),
+        defined: action.payload.results.data
+          .filter(etym => etym)
+          .map(wordData => wordData.word.replace("[1]", ""))
       });
     case "SELECTED_KEYWORD":
       return Object.assign({}, state, {

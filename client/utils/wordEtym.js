@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 
 class WordEtym extends React.Component {
   render() {
+    const defIndex = this.props.defined.findIndex(
+      word => word === this.props.selected.word
+    );
     return (
       <Wrapper className="sticky-top">
         <EtymCard className="row">
@@ -15,10 +18,31 @@ class WordEtym extends React.Component {
               <p>{this.props.selected.word}</p>
               <hr />
               <EtymHeading>{"ETYMOLOGY"}</EtymHeading>
-              <p>Language: </p>
+              {defIndex !== -1
+                ? this.props.definitions[defIndex].etm.map(pair => {
+                    console.log("PAIR ", pair);
+                    const keys = Object.keys(pair);
+                    return keys.map((key, index) => {
+                      return (
+                        <div key={index}>
+                          <p>
+                            {key + " "}
+                            <Italic>{pair[key]}</Italic>
+                          </p>
+                        </div>
+                      );
+                    });
+                  })
+                : ""}
               <hr />
               <EtymHeading>{"DATE"}</EtymHeading>
-              <p>Century</p>
+              <p>
+                {this.props.definitions &&
+                this.props.defined &&
+                this.props.defined.join(" ").includes(this.props.selected.word)
+                  ? this.props.definitions[defIndex].date
+                  : ""}
+              </p>
               <hr />
             </div>
           ) : (
@@ -29,6 +53,10 @@ class WordEtym extends React.Component {
     );
   }
 }
+
+const Italic = styled.span`
+  font-style: italic;
+`;
 
 const EtymHeading = styled.p`
   font-weight: bold;
@@ -57,7 +85,9 @@ function mapStateToProps(state) {
   return {
     view: state.view,
     results: state.results,
-    selected: state.selected
+    selected: state.selected,
+    definitions: state.definitions,
+    defined: state.defined
   };
 }
 
