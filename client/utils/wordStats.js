@@ -74,12 +74,9 @@ class WordStats extends React.Component {
   }
 }
 
-const Wrapper = styled.div`
-  width: 100%;
-`;
-
 const ContentContainer = styled.div`
   text-align: center;
+  top: 200px;
 `;
 
 const KeywordMatch = styled.div`

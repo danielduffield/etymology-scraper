@@ -6,18 +6,41 @@ import { connect } from "react-redux";
 class WordEtym extends React.Component {
   render() {
     return (
-      <div>
-        {this.props.selected.word ? (
-          <div>
-            <span>{this.props.selected.word}</span>
-          </div>
-        ) : (
-          <p>None Selected</p>
-        )}
-      </div>
+      <Wrapper className="sticky-top">
+        <EtymCard className="row">
+          {this.props.selected.word ? (
+            <div className="col">
+              <hr />
+              <EtymHeading>{"WORD"}</EtymHeading>
+              <p>{this.props.selected.word}</p>
+              <hr />
+              <EtymHeading>{"ETYMOLOGY"}</EtymHeading>
+              <p>Language: </p>
+              <hr />
+              <EtymHeading>{"DATE"}</EtymHeading>
+              <p>Century</p>
+              <hr />
+            </div>
+          ) : (
+            <div className="col" />
+          )}
+        </EtymCard>
+      </Wrapper>
     );
   }
 }
+
+const EtymHeading = styled.p`
+  font-weight: bold;
+`;
+
+const EtymCard = styled.div`
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  top: 200px;
+`;
 
 const ContentContainer = styled.div`
   border: 2px solid black;
